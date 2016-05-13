@@ -23,4 +23,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * User follow many shows
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function shows()
+    {
+        return $this->hasMany('App\Show');
+    }
 }
