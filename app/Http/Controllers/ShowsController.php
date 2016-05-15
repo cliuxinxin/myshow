@@ -29,7 +29,17 @@ class ShowsController extends Controller
      */
     public function index()
     {
-        $shows = Show::all();
+
+        $all_shows = Show::all();
+
+        if(Auth::user()){
+            $user_shows = Auth::user()->shows;
+        } else {
+            $user_shows = [];
+        }
+
+        $shows = $all_shows->diff($user_shows);
+
         return view('shows.index',compact('shows'));
     }
 
@@ -48,14 +58,18 @@ class ShowsController extends Controller
      */
     public function follow($show)
     {
-        Auth::user()->shows()->attach($show);
+        if (Auth::user()->shows->has($show)){
+            //do nothing
+        } else {
+            Auth::user()->shows()->attach($show);
+        }
 
         return redirect('shows/user');
     }
 
     /**
      * Unfollow the show
-     * 
+     *
      * @param $show
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
