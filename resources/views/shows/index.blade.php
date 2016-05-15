@@ -15,7 +15,7 @@
                 <tbody>
                     @foreach($shows as $show)
                         <tr>
-                            <td>{{$show->name}}</td>
+                            <td><a href="{{ url('episodes').'/'.$show->id }}">{{$show->name}}</a></td>
                             <td>{{$show->type}}</td>
                             <td><a class="btn btn-success" href="{{url('shows/follow').'/'.$show->id}}">Follow</a></td>
                         </tr>

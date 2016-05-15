@@ -43,6 +43,11 @@ class ShowsController extends Controller
         return view('shows.index',compact('shows'));
     }
 
+    /**
+     * Display user's shows
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function userShows()
     {
         $shows = Auth::user()->shows;
@@ -58,11 +63,7 @@ class ShowsController extends Controller
      */
     public function follow($show)
     {
-        if (Auth::user()->shows->has($show)){
-            //do nothing
-        } else {
-            Auth::user()->shows()->attach($show);
-        }
+        Auth::user()->shows()->sync([$show], false);
 
         return redirect('shows/user');
     }

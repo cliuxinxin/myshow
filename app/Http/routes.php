@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ShowsController@index');
 
 Route::auth();
 
@@ -23,8 +21,9 @@ Route::get('/shows','ShowsController@index');
 Route::get('/shows/spider','ShowsController@spider');
 Route::get('/shows/follow/{show}','ShowsController@follow');
 Route::get('/shows/unfollow/{show}','ShowsController@unfollow');
-
 Route::get('/shows/user','ShowsController@userShows');
+
+Route::get('/episodes/{show}','EpisodesController@episodesSpider');
 
 //Route::get('/test', function() {
 //    $crawler = Goutte::request('GET', 'http://duckduckgo.com/?q=Laravel');

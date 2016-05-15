@@ -9,7 +9,12 @@ class show extends Model
     protected $fillable = [
         'name',
         'type',
-        'url'
+        'url',
+        'update_date'
+    ];
+
+    protected $date=[
+        'update_date'
     ];
 
     /**
