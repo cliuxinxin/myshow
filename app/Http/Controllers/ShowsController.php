@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Show;
@@ -13,6 +14,14 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class ShowsController extends Controller
 {
+
+    /**
+     * use auth on follow
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['follow']);
+    }
     /**
      * Show list
      *
@@ -24,10 +33,37 @@ class ShowsController extends Controller
         return view('shows.index',compact('shows'));
     }
 
+    public function userShows()
+    {
+        $shows = Auth::user()->shows;
+
+        return view('shows.userShows',compact('shows'));
+    }
+
+    /**
+     * Follow the show on index
+     *
+     * @param $show
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function follow($show)
     {
+        Auth::user()->shows()->attach($show);
 
-        return $show;
+        return redirect('shows/user');
+    }
+
+    /**
+     * Unfollow the show
+     * 
+     * @param $show
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function unfollow($show)
+    {
+        Auth::user()->shows()->detach($show);
+
+        return redirect('shows/user');
     }
 
     /**
@@ -51,7 +87,7 @@ class ShowsController extends Controller
     {
         $crawler = Goutte::request('GET', 'http://epguides.com/menu/current.shtml');
         $nodeValues = $crawler->filter('td.tdmenu ul li b a')->each(function (Crawler $node, $i) {
-            return $node->text();
+            return [$node->text(),$node->attr('href')];
         });
         return $nodeValues;
     }
@@ -64,7 +100,7 @@ class ShowsController extends Controller
         $nodeValues = $this->spiderTheShow();
 
         foreach ($nodeValues as $nodeValue) {
-            $show = Show::firstOrCreate(['name' => $nodeValue, 'type' => 'American Show']);
+            $show = Show::firstOrCreate(['name' => $nodeValue[0],'url' => $nodeValue[1], 'type' => 'American Show']);
         }
     }
 }

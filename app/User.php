@@ -31,6 +31,6 @@ class User extends Authenticatable
      */
     public function shows()
     {
-        return $this->hasMany('App\Show');
+        return $this->belongsToMany('App\Show')->withTimestamps();
     }
 }

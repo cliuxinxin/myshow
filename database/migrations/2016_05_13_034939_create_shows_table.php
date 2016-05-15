@@ -16,6 +16,7 @@ class CreateShowsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('type');
+            $table->string('url');
             $table->timestamps();
         });
     }

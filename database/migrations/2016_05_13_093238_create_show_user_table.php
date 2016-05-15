@@ -13,8 +13,13 @@ class CreateShowUserTable extends Migration
     public function up()
     {
         Schema::create('show_user', function (Blueprint $table) {
-            $table->string('name');
-            $table->string('type');
+            $table->integer('show_id')->unsigned()->index();
+            $table->foreign('show_id')->references('id')->on('shows')->onDelete('cascade');
+
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 

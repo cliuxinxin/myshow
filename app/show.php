@@ -8,7 +8,8 @@ class show extends Model
 {
     protected $fillable = [
         'name',
-        'type'
+        'type',
+        'url'
     ];
 
     /**
@@ -16,7 +17,7 @@ class show extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function user()
+    public function users()
     {
         return $this->belongsToMany('App/User');
     }
