@@ -2,6 +2,7 @@
     <script>
         $(document).ready(function() {
             $('#{{$table_name}}').DataTable( {
+                stateSave: true,
                 "order": [[ 0, "desc" ]],
                 "lengthMenu": [ 25, 50],
                 initComplete: function () {
@@ -13,7 +14,7 @@
                                 .on( 'change', function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                             $(this).val()
-                                    );
+                                     );
                                     column
                                             .search( val ? '^'+val+'$' : '', true, false )
                                             .draw();
