@@ -19,7 +19,11 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/shows') }}">shows</a></li>
+                <li><a href="{{ url('/shows') }}">Shows</a></li>
+                @unless(Auth::guest())
+                    <li><a href="{{ url('/shows/user') }}"><i class="fa fa-btn fa-sign-out"></i>My TV Show</a></li>
+                @endunless
+
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -35,7 +39,6 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/shows/user') }}"><i class="fa fa-btn fa-sign-out"></i>My TV Show</a></li>
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                         </ul>
                     </li>

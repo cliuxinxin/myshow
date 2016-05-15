@@ -2,6 +2,7 @@
     <script>
         $(document).ready(function() {
             $('#{{$table_name}}').DataTable( {
+                "order": [[ 0, "desc" ]],
                 "lengthMenu": [ 25, 50],
                 initComplete: function () {
                     var api = this.api();

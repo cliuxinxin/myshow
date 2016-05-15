@@ -23,7 +23,7 @@ Route::get('/shows/follow/{show}','ShowsController@follow');
 Route::get('/shows/unfollow/{show}','ShowsController@unfollow');
 Route::get('/shows/user','ShowsController@userShows');
 
-Route::get('/episodes/{show}','EpisodesController@episodesSpider');
+//Route::get('/episodes/{show}','EpisodesController@episodesSpider');
 Route::get('/shows/{show}','EpisodesController@index');
 Route::get('/episodes/seen/{episode}','EpisodesController@seen');
 Route::get('/episodes/unseen/{episode}','EpisodesController@unSeen');

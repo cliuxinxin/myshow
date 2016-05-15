@@ -100,7 +100,7 @@ class ShowsController extends Controller
      */
     public function spiderTheShow()
     {
-        $crawler = Goutte::request('GET', 'http://epguides.com/menu/current.shtml');
+        $crawler = Goutte::request('GET', 'http://epguides.com/menu/');
         $nodeValues = $crawler->filter('td.tdmenu ul li b a')->each(function (Crawler $node, $i) {
             return [$node->text(),$node->attr('href')];
         });
