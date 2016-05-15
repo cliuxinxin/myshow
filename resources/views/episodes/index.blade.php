@@ -42,4 +42,4 @@
     </div>
 @endsection
 
-@include('partial.datatable',['table_name'=>'episodes_table'])
+@include('partial.datatable',['table_name'=>'episodes_table','columns'=>'0'])

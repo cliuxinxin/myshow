@@ -36,4 +36,4 @@
     </div>
 @endsection
 
-@include('partial.datatable',['table_name'=>'user_shows_table'])
+@include('partial.datatable',['table_name'=>'user_shows_table','columns'=>'0'])
