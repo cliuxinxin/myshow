@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShowUserTable extends Migration
+class CreateEpisodeUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,16 @@ class CreateShowUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('show_user', function (Blueprint $table) {
-            $table->integer('show_id')->unsigned()->index();
-            $table->foreign('show_id')->references('id')->on('shows')->onDelete('cascade');
+        //
+        Schema::create('episode_user', function (Blueprint $table) {
+            $table->integer('episode_id')->unsigned()->index();
+            $table->foreign('episode_id')->references('id')->on('episodes')->onDelete('cascade');
 
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });
-
     }
 
     /**
@@ -31,6 +31,7 @@ class CreateShowUserTable extends Migration
      */
     public function down()
     {
-        Schema::drop('show_user');
+        //
+        Schema::drop('episode_user');
     }
 }

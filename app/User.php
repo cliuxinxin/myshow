@@ -33,4 +33,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Show')->withTimestamps();
     }
+
+    /**
+     * User have seen episode
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function episodes()
+    {
+        return $this->belongsToMany('App\Episode')->withTimestamps();
+    }
 }

@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Your TV Shows</h1>
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table id='user_shows_table' class="display">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -15,7 +15,7 @@
                 <tbody>
                 @foreach($shows as $show)
                     <tr>
-                        <td><a href="{{ url('episodes').'/'.$show->id }}">{{$show->name}}</a></td>
+                        <td><a href="{{ url('shows').'/'.$show->id }}">{{$show->name}}</a></td>
                         <td>{{$show->type}}</td>
                         <td><a class="btn btn-danger" href="{{url('shows/unfollow').'/'.$show->id}}">UnFollow</a></td>
                     </tr>
@@ -35,3 +35,5 @@
 
     </div>
 @endsection
+
+@include('partial.datatable',['table_name'=>'user_shows_table'])
