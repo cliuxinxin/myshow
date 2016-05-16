@@ -88,7 +88,11 @@ class ShowsController extends Controller
      */
     public function spider()
     {
-        $this->spiderAndCreateShows();
+        $alphabets = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+        foreach($alphabets as $alphabet){
+            $this->spiderAndCreateShows($alphabet);
+        }
 
         return 'OK';
     }
@@ -98,9 +102,9 @@ class ShowsController extends Controller
      *
      * @return mixed
      */
-    public function spiderTheShow()
+    public function spiderTheShow($alphabet)
     {
-        $crawler = Goutte::request('GET', 'http://epguides.com/menu/');
+        $crawler = Goutte::request('GET', 'http://epguides.com/menu'.$alphabet.'/');
         $nodeValues = $crawler->filter('td.tdmenu ul li b a')->each(function (Crawler $node, $i) {
             return [$node->text(),$node->attr('href')];
         });
@@ -110,9 +114,9 @@ class ShowsController extends Controller
     /**
      * Spider the show and create show
      */
-    public function spiderAndCreateShows()
+    public function spiderAndCreateShows($alphabet)
     {
-        $nodeValues = $this->spiderTheShow();
+        $nodeValues = $this->spiderTheShow($alphabet);
 
         foreach ($nodeValues as $nodeValue) {
             $show = Show::firstOrCreate(['name' => $nodeValue[0],'url' => $nodeValue[1], 'type' => 'American Show']);
